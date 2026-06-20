@@ -1,211 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ninjago Fan Hub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ninjago Ultimate Fan Hub</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+/* ===== GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: black;
+  overflow-x: hidden;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #1a1a1a, #000);
-      color: white;
-    }
+/* ===== ANIMATED BACKGROUND ===== */
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top, #1a0000, #000);
+  animation: pulse 6s infinite alternate;
+  z-index: -2;
+}
 
-    /* HEADER */
-    header {
-      background: linear-gradient(90deg, #ff0000, #000);
-      padding: 35px 20px;
-      text-align: center;
-      box-shadow: 0 0 25px rgba(255,0,0,0.6);
-    }
+@keyframes pulse {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(40deg); }
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 44px;
-      letter-spacing: 2px;
-    }
+/* floating particles */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: red;
+  border-radius: 50%;
+  animation: float 10s linear infinite;
+}
 
-    header p {
-      margin-top: 8px;
-      opacity: 0.85;
-    }
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 0; }
+  to { transform: translateY(-10vh); opacity: 1; }
+}
 
-    /* NAV */
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      background: #111;
-      padding: 10px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid #333;
-    }
+/* ===== HEADER ===== */
+header {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(90deg, #ff0000, #000);
+  box-shadow: 0 0 30px red;
+}
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: 0.2s;
-    }
+header h1 {
+  font-size: 50px;
+  margin: 0;
+  text-shadow: 0 0 20px red;
+}
 
-    nav a:hover {
-      background: red;
-    }
+header p {
+  opacity: 0.8;
+}
 
-    /* CONTAINER */
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
+/* ===== NAV ===== */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  background: #111;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+}
 
-    /* CARDS */
-    .card {
-      background: #1b1b1b;
-      margin: 20px 0;
-      padding: 20px;
-      border-radius: 15px;
-      border: 1px solid #2a2a2a;
-      box-shadow: 0 0 15px rgba(255,0,0,0.15);
-    }
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
 
-    .card h2 {
-      margin-top: 0;
-      color: #ff4444;
-    }
+nav a:hover {
+  background: red;
+  box-shadow: 0 0 10px red;
+}
 
-    /* GRID */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 15px;
-    }
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
 
-    .character {
-      background: #222;
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      border: 1px solid #333;
-      transition: 0.2s;
-    }
+/* ===== CARDS ===== */
+.card {
+  background: rgba(20,20,20,0.9);
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid #333;
+  transition: 0.3s;
+}
 
-    .character:hover {
-      transform: scale(1.05);
-      border-color: red;
-      box-shadow: 0 0 10px red;
-    }
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px red;
+}
 
-    /* BUTTON */
-    button {
-      padding: 12px 18px;
-      background: red;
-      border: none;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: 0.2s;
-    }
+/* ===== NINJA GRID ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
 
-    button:hover {
-      background: darkred;
-      transform: scale(1.05);
-    }
+.character {
+  background: #222;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid #333;
+}
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 20px;
-      opacity: 0.6;
-      border-top: 1px solid #222;
-      margin-top: 40px;
-    }
+.character:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px red;
+  border-color: red;
+}
 
-    /* SMOOTH SCROLL */
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
+/* ===== BUTTON ===== */
+button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: red;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: darkred;
+  transform: scale(1.05);
+}
+
+/* ===== SECRET MESSAGE ===== */
+#secret {
+  margin-top: 10px;
+  color: lime;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 20px;
+  opacity: 0.5;
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>🐉 NINJAGO FAN HUB</h1>
-    <p>Elemental Power • Spinjitzu • Legends</p>
-  </header>
+<div class="bg"></div>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#ninja">Ninjas</a>
-    <a href="#spin">Spinjitzu</a>
-  </nav>
+<header>
+  <h1>🐉 NINJAGO ULTIMATE HUB</h1>
+  <p>Enter the world of Spinjitzu</p>
+</header>
 
-  <div class="container">
+<nav>
+  <a href="#about">About</a>
+  <a href="#ninjas">Ninjas</a>
+  <a href="#spin">Spinjitzu</a>
+</nav>
 
-    <!-- ABOUT -->
-    <section id="about" class="card">
-      <h2>🔥 About Ninjago</h2>
-      <p>
-        Ninjago is a legendary world where elemental ninjas train under Masters of Spinjitzu
-        to protect their realm from evil forces like Garmadon, the Serpentine, and many more threats.
-      </p>
-    </section>
+<div class="container">
 
-    <!-- NINJAS -->
-    <section id="ninja" class="card">
-      <h2>⚡ Main Ninjas</h2>
+<!-- ABOUT -->
+<section id="about" class="card">
+  <h2>🔥 About</h2>
+  <p>Ninjago is a world of elemental warriors fighting darkness with Spinjitzu power.</p>
+</section>
 
-      <div class="grid">
-        <div class="character">Kai 🔥<br><small>Fire Ninja</small></div>
-        <div class="character">Jay ⚡<br><small>Lightning Ninja</small></div>
-        <div class="character">Cole ⛰️<br><small>Earth Ninja</small></div>
-        <div class="character">Zane ❄️<br><small>Ice Ninja</small></div>
-        <div class="character">Nya 🌊<br><small>Water Ninja</small></div>
-        <div class="character">Lloyd 🟢<br><small>Green Ninja</small></div>
-      </div>
-    </section>
+<!-- NINJAS -->
+<section id="ninjas" class="card">
+  <h2>⚡ Ninjas (click them)</h2>
 
-    <!-- SPINJITZU -->
-    <section id="spin" class="card">
-      <h2>🌀 Spinjitzu Training</h2>
-      <p>Press the button to activate your ninja power!</p>
-
-      <button onclick="spin()">Activate Spinjitzu</button>
-      <p id="result"></p>
-    </section>
-
+  <div class="grid">
+    <div class="character" onclick="ninja('Kai 🔥 Fire')">Kai 🔥</div>
+    <div class="character" onclick="ninja('Jay ⚡ Lightning')">Jay ⚡</div>
+    <div class="character" onclick="ninja('Cole ⛰️ Earth')">Cole ⛰️</div>
+    <div class="character" onclick="ninja('Zane ❄️ Ice')">Zane ❄️</div>
+    <div class="character" onclick="ninja('Nya 🌊 Water')">Nya 🌊</div>
+    <div class="character" onclick="ninja('Lloyd 🟢 Green Ninja')">Lloyd 🟢</div>
   </div>
 
-  <footer>
-    Made by a true Ninjago fan 🐉🔥
-  </footer>
+  <p id="info"></p>
+</section>
 
-  <script>
-    function spin() {
-      const messages = [
-        "Kai unleashes FIRE! 🔥",
-        "Jay strikes with LIGHTNING ⚡",
-        "Cole shakes the EARTH ⛰️",
-        "Zane freezes everything ❄️",
-        "Nya controls the WATER 🌊",
-        "Lloyd powers up the GREEN ENERGY 🟢"
-      ];
+<!-- SPIN -->
+<section id="spin" class="card">
+  <h2>🌀 Spinjitzu Generator</h2>
+  <button onclick="spin()">Spin Power</button>
+  <p id="spinResult"></p>
 
-      const random = messages[Math.floor(Math.random() * messages.length)];
-      document.getElementById("result").innerText = random;
-    }
-  </script>
+  <p>Secret:</p>
+  <button onclick="secret()">Try me</button>
+  <p id="secret"></p>
+</section>
+
+</div>
+
+<footer>
+Made by a true Ninjago fan 🐉🔥
+</footer>
+
+<script>
+
+/* particles */
+for (let i = 0; i < 30; i++) {
+  let p = document.createElement("div");
+  p.className = "particle";
+  p.style.left = Math.random() * 100 + "vw";
+  p.style.animationDuration = (5 + Math.random() * 10) + "s";
+  document.body.appendChild(p);
+}
+
+/* ninja click */
+function ninja(name) {
+  document.getElementById("info").innerText =
+    "You selected: " + name + " 🐉";
+}
+
+/* spin system */
+function spin() {
+  const powers = [
+    "🔥 Fire Surge!",
+    "⚡ Lightning Strike!",
+    "⛰️ Earth Shield!",
+    "❄️ Ice Freeze!",
+    "🌊 Water Flow!",
+    "🟢 Energy Burst!"
+  ];
+
+  let pick = powers[Math.floor(Math.random() * powers.length)];
+  document.getElementById("spinResult").innerText = pick;
+}
+
+/* secret easter egg */
+function secret() {
+  document.getElementById("secret").innerText =
+    "🟢 You unlocked the Golden Ninja Mode...";
+}
+
+</script>
 
 </body>
 </html>
