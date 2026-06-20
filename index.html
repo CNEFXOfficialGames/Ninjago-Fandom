@@ -3,162 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ninjago Ultimate Fan Hub</title>
+<title>Ninjago Training Hub</title>
 
 <style>
-/* ===== GLOBAL ===== */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   color: white;
   background: black;
   overflow-x: hidden;
 }
 
-/* ===== ANIMATED BACKGROUND ===== */
+/* BACKGROUND */
 .bg {
   position: fixed;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at top, #1a0000, #000);
-  animation: pulse 6s infinite alternate;
+  inset: 0;
+  background: radial-gradient(circle at top, #200000, #000);
+  animation: glow 5s infinite alternate;
   z-index: -2;
 }
 
-@keyframes pulse {
+@keyframes glow {
   0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(40deg); }
+  100% { filter: hue-rotate(60deg); }
 }
 
-/* floating particles */
-.particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: red;
-  border-radius: 50%;
-  animation: float 10s linear infinite;
-}
-
-@keyframes float {
-  from { transform: translateY(100vh); opacity: 0; }
-  to { transform: translateY(-10vh); opacity: 1; }
-}
-
-/* ===== HEADER ===== */
+/* HEADER */
 header {
   text-align: center;
-  padding: 60px 20px;
+  padding: 50px 20px;
   background: linear-gradient(90deg, #ff0000, #000);
-  box-shadow: 0 0 30px red;
+  box-shadow: 0 0 25px red;
 }
 
 header h1 {
-  font-size: 50px;
   margin: 0;
-  text-shadow: 0 0 20px red;
+  font-size: 42px;
 }
 
-header p {
-  opacity: 0.8;
-}
-
-/* ===== NAV ===== */
-nav {
+/* HUD */
+.hud {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-around;
+  padding: 15px;
   background: #111;
-  padding: 10px;
   position: sticky;
   top: 0;
+  z-index: 10;
+  border-bottom: 1px solid #333;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  padding: 8px 12px;
+.bar {
+  width: 200px;
+  height: 15px;
+  background: #222;
   border-radius: 10px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  width: 0%;
+  background: red;
   transition: 0.3s;
 }
 
-nav a:hover {
-  background: red;
-  box-shadow: 0 0 10px red;
-}
-
-/* ===== CONTAINER ===== */
+/* GRID */
 .container {
-  max-width: 1000px;
+  max-width: 900px;
   margin: auto;
   padding: 20px;
 }
 
-/* ===== CARDS ===== */
-.card {
-  background: rgba(20,20,20,0.9);
-  margin: 20px 0;
-  padding: 20px;
-  border-radius: 15px;
-  border: 1px solid #333;
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 20px red;
-}
-
-/* ===== NINJA GRID ===== */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
+  gap: 12px;
 }
 
-.character {
-  background: #222;
+.card {
+  background: #1a1a1a;
   padding: 15px;
   border-radius: 12px;
+  border: 1px solid #333;
   text-align: center;
   cursor: pointer;
-  transition: 0.3s;
-  border: 1px solid #333;
+  transition: 0.2s;
 }
 
-.character:hover {
-  transform: scale(1.1);
+.card:hover {
+  transform: scale(1.05);
   box-shadow: 0 0 15px red;
-  border-color: red;
 }
 
-/* ===== BUTTON ===== */
+/* BUTTON */
 button {
-  padding: 12px 18px;
-  border: none;
-  border-radius: 10px;
+  padding: 10px 15px;
   background: red;
+  border: none;
   color: white;
+  border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 button:hover {
   background: darkred;
-  transform: scale(1.05);
 }
 
-/* ===== SECRET MESSAGE ===== */
-#secret {
+/* TEXT */
+#msg {
   margin-top: 10px;
   color: lime;
 }
 
-/* ===== FOOTER ===== */
 footer {
   text-align: center;
-  padding: 20px;
   opacity: 0.5;
+  padding: 20px;
 }
 </style>
 </head>
@@ -168,93 +129,86 @@ footer {
 <div class="bg"></div>
 
 <header>
-  <h1>🐉 NINJAGO ULTIMATE HUB</h1>
-  <p>Enter the world of Spinjitzu</p>
+  <h1>🐉 NINJAGO TRAINING HUB</h1>
+  <p>Become a Master of Spinjitzu</p>
 </header>
 
-<nav>
-  <a href="#about">About</a>
-  <a href="#ninjas">Ninjas</a>
-  <a href="#spin">Spinjitzu</a>
-</nav>
+<!-- HUD -->
+<div class="hud">
+  <div>
+    Power Level: <span id="level">1</span>
+  </div>
+
+  <div class="bar">
+    <div class="fill" id="xp"></div>
+  </div>
+
+  <div id="rank">Rookie Ninja</div>
+</div>
 
 <div class="container">
 
-<!-- ABOUT -->
-<section id="about" class="card">
-  <h2>🔥 About</h2>
-  <p>Ninjago is a world of elemental warriors fighting darkness with Spinjitzu power.</p>
-</section>
-
 <!-- NINJAS -->
-<section id="ninjas" class="card">
-  <h2>⚡ Ninjas (click them)</h2>
+<h2>⚡ Choose Your Ninja</h2>
+<div class="grid">
 
-  <div class="grid">
-    <div class="character" onclick="ninja('Kai 🔥 Fire')">Kai 🔥</div>
-    <div class="character" onclick="ninja('Jay ⚡ Lightning')">Jay ⚡</div>
-    <div class="character" onclick="ninja('Cole ⛰️ Earth')">Cole ⛰️</div>
-    <div class="character" onclick="ninja('Zane ❄️ Ice')">Zane ❄️</div>
-    <div class="character" onclick="ninja('Nya 🌊 Water')">Nya 🌊</div>
-    <div class="character" onclick="ninja('Lloyd 🟢 Green Ninja')">Lloyd 🟢</div>
-  </div>
+  <div class="card" onclick="select('Kai 🔥')">Kai</div>
+  <div class="card" onclick="select('Jay ⚡')">Jay</div>
+  <div class="card" onclick="select('Cole ⛰️')">Cole</div>
+  <div class="card" onclick="select('Zane ❄️')">Zane</div>
+  <div class="card" onclick="select('Nya 🌊')">Nya</div>
+  <div class="card" onclick="select('Lloyd 🟢')">Lloyd</div>
 
-  <p id="info"></p>
-</section>
+</div>
 
-<!-- SPIN -->
-<section id="spin" class="card">
-  <h2>🌀 Spinjitzu Generator</h2>
-  <button onclick="spin()">Spin Power</button>
-  <p id="spinResult"></p>
+<p id="selected">No ninja selected</p>
 
-  <p>Secret:</p>
-  <button onclick="secret()">Try me</button>
-  <p id="secret"></p>
-</section>
+<hr>
+
+<!-- TRAINING -->
+<h2>🌀 Training Actions</h2>
+<button onclick="train()">Train Spinjitzu</button>
+<button onclick="train()">Element Attack</button>
+<button onclick="train()">Focus Energy</button>
+
+<p id="msg"></p>
 
 </div>
 
 <footer>
-Made by a true Ninjago fan 🐉🔥
+Made by a rising ninja 🐉🔥
 </footer>
 
 <script>
 
-/* particles */
-for (let i = 0; i < 30; i++) {
-  let p = document.createElement("div");
-  p.className = "particle";
-  p.style.left = Math.random() * 100 + "vw";
-  p.style.animationDuration = (5 + Math.random() * 10) + "s";
-  document.body.appendChild(p);
+let xp = 0;
+let level = 1;
+
+function select(name) {
+  document.getElementById("selected").innerText =
+    "Selected: " + name + " 🐉";
 }
 
-/* ninja click */
-function ninja(name) {
-  document.getElementById("info").innerText =
-    "You selected: " + name + " 🐉";
-}
+function train() {
+  xp += 20;
 
-/* spin system */
-function spin() {
-  const powers = [
-    "🔥 Fire Surge!",
-    "⚡ Lightning Strike!",
-    "⛰️ Earth Shield!",
-    "❄️ Ice Freeze!",
-    "🌊 Water Flow!",
-    "🟢 Energy Burst!"
-  ];
+  if (xp >= 100) {
+    level++;
+    xp = 0;
+  }
 
-  let pick = powers[Math.floor(Math.random() * powers.length)];
-  document.getElementById("spinResult").innerText = pick;
-}
+  document.getElementById("xp").style.width = xp + "%";
+  document.getElementById("level").innerText = level;
 
-/* secret easter egg */
-function secret() {
-  document.getElementById("secret").innerText =
-    "🟢 You unlocked the Golden Ninja Mode...";
+  let rank = "Rookie Ninja";
+  if (level >= 2) rank = "Apprentice Ninja";
+  if (level >= 4) rank = "Master of Spinjitzu";
+  if (level >= 6) rank = "Golden Ninja";
+
+  document.getElementById("rank").innerText = rank;
+
+  document.getElementById("msg").innerText =
+    "Training successful ⚡ +XP gained!";
 }
 
 </script>
