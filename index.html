@@ -3,53 +3,137 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fan Page</title>
+  <title>Ninjago Fan Hub</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(120deg, #111, #1a1a1a);
+      background: radial-gradient(circle at top, #1a1a1a, #000);
       color: white;
-      text-align: center;
     }
 
+    /* HEADER */
     header {
-      padding: 40px;
-      background: #d40000;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      background: linear-gradient(90deg, #ff0000, #000);
+      padding: 35px 20px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(255,0,0,0.6);
     }
 
-    h1 {
+    header h1 {
       margin: 0;
-      font-size: 40px;
+      font-size: 44px;
+      letter-spacing: 2px;
     }
 
-    .container {
-      padding: 30px;
+    header p {
+      margin-top: 8px;
+      opacity: 0.85;
     }
 
-    .card {
-      background: #222;
-      margin: 20px auto;
-      padding: 20px;
-      max-width: 600px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(255,0,0,0.3);
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background: #111;
+      padding: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #333;
     }
 
-    button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      background: red;
+    nav a {
       color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      background: red;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    /* CARDS */
+    .card {
+      background: #1b1b1b;
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid #2a2a2a;
+      box-shadow: 0 0 15px rgba(255,0,0,0.15);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #ff4444;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+    }
+
+    .character {
+      background: #222;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid #333;
+      transition: 0.2s;
+    }
+
+    .character:hover {
+      transform: scale(1.05);
+      border-color: red;
+      box-shadow: 0 0 10px red;
+    }
+
+    /* BUTTON */
+    button {
+      padding: 12px 18px;
+      background: red;
+      border: none;
+      color: white;
+      border-radius: 10px;
       cursor: pointer;
       font-size: 16px;
+      transition: 0.2s;
     }
 
     button:hover {
       background: darkred;
+      transform: scale(1.05);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      opacity: 0.6;
+      border-top: 1px solid #222;
+      margin-top: 40px;
+    }
+
+    /* SMOOTH SCROLL */
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
@@ -57,28 +141,71 @@
 <body>
 
   <header>
-    <h1>🔥 Fan Page</h1>
-    <p>Welcome to my fan website</p>
+    <h1>🐉 NINJAGO FAN HUB</h1>
+    <p>Elemental Power • Spinjitzu • Legends</p>
   </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#ninja">Ninjas</a>
+    <a href="#spin">Spinjitzu</a>
+  </nav>
 
   <div class="container">
 
-    <div class="card">
-      <h2>About</h2>
-      <p>This is a fan page made for my favourite show / game / movie.</p>
-    </div>
+    <!-- ABOUT -->
+    <section id="about" class="card">
+      <h2>🔥 About Ninjago</h2>
+      <p>
+        Ninjago is a legendary world where elemental ninjas train under Masters of Spinjitzu
+        to protect their realm from evil forces like Garmadon, the Serpentine, and many more threats.
+      </p>
+    </section>
 
-    <div class="card">
-      <h2>Updates</h2>
-      <p>No updates yet... but stay tuned 👀</p>
-    </div>
+    <!-- NINJAS -->
+    <section id="ninja" class="card">
+      <h2>⚡ Main Ninjas</h2>
 
-    <div class="card">
-      <h2>Secret Button</h2>
-      <button onclick="alert('You found a secret! 🔥')">Click me</button>
-    </div>
+      <div class="grid">
+        <div class="character">Kai 🔥<br><small>Fire Ninja</small></div>
+        <div class="character">Jay ⚡<br><small>Lightning Ninja</small></div>
+        <div class="character">Cole ⛰️<br><small>Earth Ninja</small></div>
+        <div class="character">Zane ❄️<br><small>Ice Ninja</small></div>
+        <div class="character">Nya 🌊<br><small>Water Ninja</small></div>
+        <div class="character">Lloyd 🟢<br><small>Green Ninja</small></div>
+      </div>
+    </section>
+
+    <!-- SPINJITZU -->
+    <section id="spin" class="card">
+      <h2>🌀 Spinjitzu Training</h2>
+      <p>Press the button to activate your ninja power!</p>
+
+      <button onclick="spin()">Activate Spinjitzu</button>
+      <p id="result"></p>
+    </section>
 
   </div>
+
+  <footer>
+    Made by a true Ninjago fan 🐉🔥
+  </footer>
+
+  <script>
+    function spin() {
+      const messages = [
+        "Kai unleashes FIRE! 🔥",
+        "Jay strikes with LIGHTNING ⚡",
+        "Cole shakes the EARTH ⛰️",
+        "Zane freezes everything ❄️",
+        "Nya controls the WATER 🌊",
+        "Lloyd powers up the GREEN ENERGY 🟢"
+      ];
+
+      const random = messages[Math.floor(Math.random() * messages.length)];
+      document.getElementById("result").innerText = random;
+    }
+  </script>
 
 </body>
 </html>
